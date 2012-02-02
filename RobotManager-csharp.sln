@@ -1,0 +1,27 @@
+Microsoft Visual Studio Solution File, Format Version 10.00
+# Visual Studio 2008
+
+Project("{63BE1F03-1AEF-033C-51BE-A5FAD0436774}") = "RobotManager", "Assembly-CSharp-firstpass-vs.csproj", "{87E7FC25-3F9C-06D5-9A45-BDAFD1476FE6}"
+EndProject
+Project("{63BE1F03-1AEF-033C-51BE-A5FAD0436774}") = "RobotManager", "Assembly-CSharp-vs.csproj", "{BBAF971E-0603-0353-95ED-4DFBF4791CB4}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{87E7FC25-3F9C-06D5-9A45-BDAFD1476FE6}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{87E7FC25-3F9C-06D5-9A45-BDAFD1476FE6}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{87E7FC25-3F9C-06D5-9A45-BDAFD1476FE6}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{87E7FC25-3F9C-06D5-9A45-BDAFD1476FE6}.Release|Any CPU.Build.0 = Release|Any CPU
+		{BBAF971E-0603-0353-95ED-4DFBF4791CB4}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{BBAF971E-0603-0353-95ED-4DFBF4791CB4}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{BBAF971E-0603-0353-95ED-4DFBF4791CB4}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{BBAF971E-0603-0353-95ED-4DFBF4791CB4}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	
+EndGlobal
