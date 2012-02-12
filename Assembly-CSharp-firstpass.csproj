@@ -44,6 +44,10 @@
 	</Reference>
   </ItemGroup>
   <ItemGroup>
+     <Compile Include="Assets\Plugins\CharacterElement.cs" />
+     <Compile Include="Assets\Plugins\CharacterElementHolder.cs" />
+     <Compile Include="Assets\Plugins\CharacterGenerator.cs" />
+     <Compile Include="Assets\Plugins\StringHolder.cs" />
      <Compile Include="Assets\Standard Assets\Scripts\General Scripts\ActivateTrigger.cs" />
      <Compile Include="Assets\Standard Assets\Scripts\Utility Scripts\CombineChildren.cs" />
      <Compile Include="Assets\Standard Assets\Scripts\Utility Scripts\MeshCombineUtility.cs" />

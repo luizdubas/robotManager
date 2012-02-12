@@ -44,9 +44,26 @@
 	</Reference>
   </ItemGroup>
   <ItemGroup>
+     <Compile Include="Assets\Locomotion System\AlignmentTracker.cs" />
+     <Compile Include="Assets\Locomotion System\GhostOriginal.cs" />
+     <Compile Include="Assets\Locomotion System\HeadLookController.cs" />
+     <Compile Include="Assets\Locomotion System\IK1JointAnalytic.cs" />
+     <Compile Include="Assets\Locomotion System\IKSimple.cs" />
+     <Compile Include="Assets\Locomotion System\IKSolver.cs" />
+     <Compile Include="Assets\Locomotion System\IMotionAnalyzer.cs" />
+     <Compile Include="Assets\Locomotion System\Interpolator.cs" />
+     <Compile Include="Assets\Locomotion System\LegAnimator.cs" />
+     <Compile Include="Assets\Locomotion System\LegController.cs" />
+     <Compile Include="Assets\Locomotion System\MotionAnalyzer.cs" />
+     <Compile Include="Assets\Locomotion System\MotionAnalyzerBackwards.cs" />
+     <Compile Include="Assets\Locomotion System\PolarGradientBandInterpolator.cs" />
+     <Compile Include="Assets\Locomotion System\TrajectoryVisualizer.cs" />
+     <Compile Include="Assets\Locomotion System\Util.cs" />
+     <Compile Include="Assets\Scripts\GUI\CreateRobot.cs" />
+     <Compile Include="Assets\Scripts\GUI\GUIPointer.cs" />
      <Compile Include="Assets\Scripts\MainCamera.cs" />
      <Compile Include="Assets\Scripts\Robo.cs" />
-     <Compile Include="Assets\Scripts\RobotUtility.cs" />
+     <Compile Include="Assets\Scripts\Util\RobotUtility.cs" />
      <None Include="Assets\Standard Assets\Particles\Sources\Shaders\Particle Alpha Blend (Queue +100).shader" />
      <None Include="Assets\Standard Assets\Skyboxes\ skybox info.txt" />
      <None Include="Assets\Standard Assets\Toon Shading\Sources\Shaders\Toony-Lighted.shader" />
