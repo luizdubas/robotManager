@@ -2,8 +2,6 @@ using UnityEngine;
 using System.Collections;
 
 public class MainCamera : MonoBehaviour {
-	
-
 	private RobotUtility robotUtility;
 	private GameObject novoRobo;
 	private bool moving;

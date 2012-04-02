@@ -8,6 +8,17 @@ public class RobotUtility : MonoBehaviour {
 	public GameObject prefabRobot2;
 	/** Colocar aki todos os prefabs dos robos **/
 	
+	public GameObject getGameObjectByName(string nome){
+		GameObject retorno = null;
+		if( nome == "prefabRobot1" ){
+			retorno = prefabRobot1;
+		}else if( nome == "prefabRobot2" ){
+			retorno = prefabRobot2;
+		}
+		
+		return retorno;
+	}
+	
 	/** Caso nao seja escolhido o prefab do armature ele usa o do body **/
 	public GameObject criarRobo( GameObject headPrefab, GameObject bodyPrefab, GameObject armsPrefab, GameObject legsPrefab ){
 		return criarRobo( bodyPrefab,  headPrefab, bodyPrefab, armsPrefab, legsPrefab );
@@ -18,6 +29,7 @@ public class RobotUtility : MonoBehaviour {
 	}
 		
 	public GameObject criarRobo( GameObject armaturePrefab, GameObject headPrefab, GameObject bodyPrefab, GameObject armsPrefab, GameObject legsPrefab, string scriptName ){
+		Debug.Log("Ola");
 		GameObject newRobot, oldPart, newPart;
 		BoxCollider collider;
 		Rigidbody rigidbody;
@@ -106,7 +118,7 @@ public class RobotUtility : MonoBehaviour {
 		rigidbody.mass = 100;
 		rigidbody.freezeRotation = true;
 		
-	
+		Robo robo = new Robo();
 	
 		return newRobot;
 	}

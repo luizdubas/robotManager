@@ -65,6 +65,7 @@
      <Compile Include="Assets\Scripts\MainCamera.cs" />
      <Compile Include="Assets\Scripts\Robo.cs" />
      <Compile Include="Assets\Scripts\Util\RobotUtility.cs" />
+     <Compile Include="Assets\Scripts\Workshop.cs" />
      <None Include="Assets\Standard Assets\Projectors\Guidelines.txt" />
      <None Include="Assets\Standard Assets\Toon Shading\Sources\Shaders\Toony-Basic.shader" />
      <None Include="Assets\Standard Assets\Projectors\Sources\Shaders\Projector Multiply.shader" />
