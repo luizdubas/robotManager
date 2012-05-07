@@ -4,28 +4,14 @@ using System;
 
 public class Robo : MonoBehaviour {	
 	/** Atributos do robo fora de Batalha */
-	private double velocidadeBase;
-	private double ataqueBase;
-	private double defesaBase;
-	private double hpBase;
-	private double staminaBase;
-	
-	/** Bonus de equipamentos */
-	private double velocidadeBonus;
-	private double ataqueBonus;
-	private double defesaBonus;
-	private double hpBonus;
-	private double staminaBonus;
-
-	/** Atributos somandos bonus e penalidades */
-	private double velocidadeAtual;
-	private double ataqueAtual;
-	private double defesaAtual;
-	private double hpAtual;
-	private double staminaAtual;
-	
+	private Atributo velocidade;
+	private Atributo ataque;
+	private Atributo defesa;
+	private Atributo hp;
+	private Atributo stamina;
+		
 	private GameObject roboGameObject;
-	
+
 	private string headPrefabName;
 	private string bodyPrefabName;
 	private string armsPrefabName;
@@ -77,138 +63,39 @@ public class Robo : MonoBehaviour {
 	
 	
 	/** Getters and Setters */
-	public double VelocidadeBase {
+	public Atributo Ataque {
 		get {
-			return this.velocidadeBase;
+			return this.ataque;
 		}
 		set {
-			velocidadeBase = value;
+			ataque = value;
 		}
 	}
 
-	public double AtaqueBase {
+	public Atributo Defesa {
 		get {
-			return this.ataqueBase;
+			return this.defesa;
 		}
 		set {
-			ataqueBase = value;
+			defesa = value;
 		}
 	}
 
-	public double DefesaBase {
+	public Atributo Hp {
 		get {
-			return this.defesaBase;
+			return this.hp;
 		}
 		set {
-			defesaBase = value;
+			hp = value;
 		}
 	}
 
-	public double HpBase {
+	public Atributo Stamina {
 		get {
-			return this.hpBase;
+			return this.stamina;
 		}
 		set {
-			hpBase = value;
-		}
-	}
-
-	public double StaminaBase {
-		get {
-			return this.staminaBase;
-		}
-		set {
-			staminaBase = value;
-		}
-	}
-
-	public double VelocidadeBonus {
-		get {
-			return this.velocidadeBonus;
-		}
-		set {
-			velocidadeBonus = value;
-		}
-	}
-
-	public double AtaqueBonus {
-		get {
-			return this.ataqueBonus;
-		}
-		set {
-			ataqueBonus = value;
-		}
-	}
-
-	public double DefesaBonus {
-		get {
-			return this.defesaBonus;
-		}
-		set {
-			defesaBonus = value;
-		}
-	}
-
-	public double HpBonus {
-		get {
-			return this.hpBonus;
-		}
-		set {
-			hpBonus = value;
-		}
-	}
-
-	public double StaminaBonus {
-		get {
-			return this.staminaBonus;
-		}
-		set {
-			staminaBonus = value;
-		}
-	}
-
-	public double VelocidadeAtual {
-		get {
-			return this.velocidadeAtual;
-		}
-		set {
-			velocidadeAtual = value;
-		}
-	}
-
-	public double AtaqueAtual {
-		get {
-			return this.ataqueAtual;
-		}
-		set {
-			ataqueAtual = value;
-		}
-	}
-
-	public double DefesaAtual {
-		get {
-			return this.defesaAtual;
-		}
-		set {
-			defesaAtual = value;
-		}
-	}
-
-	public double HpAtual {
-		get {
-			return this.hpAtual;
-		}
-		set {
-			hpAtual = value;
-		}
-	}
-
-	public double StaminaAtual {
-		get {
-			return this.staminaAtual;
-		}
-		set {
-			staminaAtual = value;
+			stamina = value;
 		}
 	}
 
@@ -255,5 +142,5 @@ public class Robo : MonoBehaviour {
 		set {
 			legsPrefabName = value;
 		}
-	}
+	}	
 }
