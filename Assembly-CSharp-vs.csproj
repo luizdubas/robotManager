@@ -60,6 +60,7 @@
      <Compile Include="Assets\PocketRPG Trails\Scripts\Effects\WeaponTrail.cs" />
      <Compile Include="Assets\PocketRPG Trails\Scripts\Entities\BladeMaster.cs" />
      <Compile Include="Assets\PocketRPG Trails\Scripts\Utility\AnimationController.cs" />
+     <Compile Include="Assets\Scripts\Atributo.cs" />
      <Compile Include="Assets\Scripts\GUI\CreateRobot.cs" />
      <Compile Include="Assets\Scripts\GUI\GUIPointer.cs" />
      <Compile Include="Assets\Scripts\MainCamera.cs" />
