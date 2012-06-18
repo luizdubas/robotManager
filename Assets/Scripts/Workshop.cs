@@ -117,7 +117,16 @@ public class Workshop : MonoBehaviour {
 	}
 	
 	void changePartsHeadGui(){
+		RobotUtility robotUtility = GameObject.Find("RobotUtility").GetComponent<RobotUtility>();
+		
 		GUI.Label( new Rect(312, 150, 300, 50), "Head Stock", guiSkin.GetStyle("Titulo") );
+		
+		Part part = robotUtility.prefabRobot1.transform.Find("body").GetComponent<Part>();
+		
+		//GUI.Label( new Rect(312, 250, 300, 50), "Head Stock X", guiSkin.GetStyle("Titulo") );
+		GUI.Label( new Rect(312, 250, part.textura.width, part.textura.height), part.textura );
+		
+		
 	}
 	
 	void changePartsBodyGui(){

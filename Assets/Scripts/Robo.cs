@@ -35,6 +35,8 @@ public class Robo : MonoBehaviour {
 		try{
 			RobotUtility robotUtility = GameObject.Find("RobotUtility").GetComponent<RobotUtility>();
 
+			Debug.Log( this.bodyPrefabName );
+			
 			this.roboGameObject = robotUtility.criarRobo( 
 				robotUtility.getGameObjectByName(this.bodyPrefabName), /** Armature  **/
 				robotUtility.getGameObjectByName(this.headPrefabName), /** HEAD      **/
