@@ -29,7 +29,6 @@ public class RobotUtility : MonoBehaviour {
 	}
 		
 	public GameObject criarRobo( GameObject armaturePrefab, GameObject headPrefab, GameObject bodyPrefab, GameObject armsPrefab, GameObject legsPrefab, string scriptName ){
-		Debug.Log("Ola");
 		GameObject newRobot, oldPart, newPart;
 		BoxCollider collider;
 		Rigidbody rigidbody;
@@ -48,8 +47,6 @@ public class RobotUtility : MonoBehaviour {
 		
 		Debug.Log("\tProcurando armature do prefab...");
 		armature = procuraObjetoEmUmaObjetoInstanciado( "Armature", newRobot.transform ).transform;
-		
-		Debug.Log( armature );
 		
 		if( headPrefab != armaturePrefab ){
 			Debug.Log("\tContruindo Head: "+headPrefab.name );
