@@ -48,9 +48,8 @@ public class RobotUtility : MonoBehaviour {
 		Debug.Log("\tProcurando armature do prefab...");
 		armature = procuraObjetoEmUmaObjetoInstanciado( "Armature", newRobot.transform ).transform;
 		
+		Debug.Log("\tContruindo Head: "+headPrefab.name );
 		if( headPrefab != armaturePrefab ){
-			Debug.Log("\tContruindo Head: "+headPrefab.name );
-
 			oldPart = procuraObjetoEmUmaObjetoInstanciado( "head", newRobot.transform );
 			newPart = procuraObjetoEmUmaPrefab( "head", headPrefab );
 			
@@ -63,9 +62,8 @@ public class RobotUtility : MonoBehaviour {
 			newPart.transform.parent = newRobot.transform;
 		}
 		
+		Debug.Log("\tContruindo Body: "+bodyPrefab.name);
 		if( bodyPrefab != armaturePrefab ){
-			Debug.Log("\tContruindo Body: "+bodyPrefab.name);
-
 			oldPart = procuraObjetoEmUmaObjetoInstanciado( "body", newRobot.transform );
 			newPart = procuraObjetoEmUmaPrefab( "body", bodyPrefab );
 
@@ -78,10 +76,8 @@ public class RobotUtility : MonoBehaviour {
 			newPart.transform.parent = newRobot.transform;
 		}
 		
-		
+		Debug.Log("\tContruindo Arms: "+armsPrefab.name);		
 		if( armsPrefab != armaturePrefab ){
-			Debug.Log("\tContruindo Arms: "+armsPrefab.name);
-
 			oldPart = procuraObjetoEmUmaObjetoInstanciado( "arms", newRobot.transform );
 			newPart = procuraObjetoEmUmaPrefab( "arms", armsPrefab );
 
@@ -94,9 +90,8 @@ public class RobotUtility : MonoBehaviour {
 			newPart.transform.parent = newRobot.transform;
 		}
 		
+		Debug.Log("\tContruindo legs: "+legsPrefab.name);
 		if( legsPrefab != armaturePrefab ){
-			Debug.Log("\tContruindo legs: "+legsPrefab.name);
-
 			oldPart = procuraObjetoEmUmaObjetoInstanciado( "legs", newRobot.transform );
 			newPart = procuraObjetoEmUmaPrefab( "legs", legsPrefab );
 
@@ -109,6 +104,8 @@ public class RobotUtility : MonoBehaviour {
 			newPart.transform.parent = newRobot.transform;
 		}
 		
+		
+		Debug.Log("\tContruindo Fisica");
 		//collider.center = new Vector3( 0, 0 , -1 );
 		collider.size = new Vector3( 0.1F, 0.1F, 0.1F	 );
 		
