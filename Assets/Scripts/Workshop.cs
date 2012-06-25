@@ -1,5 +1,6 @@
 using UnityEngine;
 using System.Collections;
+using System.Collections.Generic;
 
 public class Workshop : MonoBehaviour {
 	
@@ -23,8 +24,7 @@ public class Workshop : MonoBehaviour {
 	public GUISkin guiSkin;
 	private int currentRobot = 0;
 	private Rect fullscreen;
-	private string RobotName = "No name";
-	private Robo robo;
+	private Player player;
 	private MenuWorkshopState menuState;
 	private MenuWorkshopChangePartsState changePartsState;
 	
@@ -32,22 +32,50 @@ public class Workshop : MonoBehaviour {
 	
 	void Start () {
 		fullscreen = new Rect(0,0,larguraGUIOriginal,alturaGUIOriginal);
+		player = new Player();
+		RobotUtility robotUtility = GameObject.Find("RobotUtility").GetComponent<RobotUtility>();
+		
 		menuState = MenuWorkshopState.Default;
 		changePartsState = MenuWorkshopChangePartsState.Head;
+				
+		player.Robo = new Robo();
+		player.Stock = new Stock();
 		
-		robo = new Robo();
+		player.Robo.HeadPrefabName = "prefabRobot1";
+		player.Robo.BodyPrefabName = "prefabRobot1";
+		player.Robo.ArmsPrefabName = "prefabRobot1";
+		player.Robo.LegsPrefabName = "prefabRobot1";
 		
-		robo.HeadPrefabName = "prefabRobot1";
-		robo.BodyPrefabName = "prefabRobot1";
-		robo.ArmsPrefabName = "prefabRobot1";
-		robo.LegsPrefabName = "prefabRobot1";
+		player.Robo.buildRobot();
+		player.Robo.disablePhysics();
 		
-		robo.buildRobot();
-		robo.disablePhysics();
-		
-		robo.RoboGameObject.transform.localScale = new Vector3( 200, 200, 200 );
-		robo.RoboGameObject.transform.position = new Vector3(0 , 9.3f, 10);
+		player.Robo.RoboGameObject.transform.localScale = new Vector3( 200, 200, 200 );
+		player.Robo.RoboGameObject.transform.position = new Vector3(0 , 9.3f, 10);
 			
+		player.Stock.HeadList = new List<GameObject>();
+		player.Stock.BodyList = new List<GameObject>();
+		player.Stock.ArmsList = new List<GameObject>();
+		player.Stock.LegsList = new List<GameObject>();
+		
+		player.Stock.HeadList.Add( robotUtility.prefabRobot1.transform.Find("head").gameObject );
+		player.Stock.BodyList.Add( robotUtility.prefabRobot1.transform.Find("body").gameObject );
+		player.Stock.ArmsList.Add( robotUtility.prefabRobot1.transform.Find("arms").gameObject );
+		player.Stock.LegsList.Add( robotUtility.prefabRobot1.transform.Find("legs").gameObject );
+		
+		player.Stock.HeadList.Add( robotUtility.prefabRobot2.transform.Find("head").gameObject );
+		player.Stock.BodyList.Add( robotUtility.prefabRobot2.transform.Find("body").gameObject );
+		player.Stock.ArmsList.Add( robotUtility.prefabRobot2.transform.Find("arms").gameObject );
+		player.Stock.LegsList.Add( robotUtility.prefabRobot2.transform.Find("legs").gameObject );
+		
+		player.Stock.HeadList.Add( robotUtility.prefabRobot1.transform.Find("head").gameObject );
+		player.Stock.BodyList.Add( robotUtility.prefabRobot1.transform.Find("body").gameObject );
+		player.Stock.ArmsList.Add( robotUtility.prefabRobot1.transform.Find("arms").gameObject );
+		player.Stock.LegsList.Add( robotUtility.prefabRobot1.transform.Find("legs").gameObject );
+		
+		player.Stock.HeadList.Add( robotUtility.prefabRobot2.transform.Find("head").gameObject );
+		player.Stock.BodyList.Add( robotUtility.prefabRobot2.transform.Find("body").gameObject );
+		player.Stock.ArmsList.Add( robotUtility.prefabRobot2.transform.Find("arms").gameObject );
+		player.Stock.LegsList.Add( robotUtility.prefabRobot2.transform.Find("legs").gameObject );
 	}
 	
 	void OnGUI(){
@@ -116,29 +144,55 @@ public class Workshop : MonoBehaviour {
 		}
 	}
 	
-	void changePartsHeadGui(){
-		RobotUtility robotUtility = GameObject.Find("RobotUtility").GetComponent<RobotUtility>();
+	void changePartsHeadGui(){		
+		GUI.Label( new Rect(222, 150, 300, 50), "Head Stock", guiSkin.GetStyle("Titulo") );
 		
-		GUI.Label( new Rect(312, 150, 300, 50), "Head Stock", guiSkin.GetStyle("Titulo") );
-		
-		Part part = robotUtility.prefabRobot1.transform.Find("body").GetComponent<Part>();
-		
-		//GUI.Label( new Rect(312, 250, 300, 50), "Head Stock X", guiSkin.GetStyle("Titulo") );
-		GUI.Label( new Rect(312, 250, part.textura.width, part.textura.height), part.textura );
-		
-		
+		showPartsPreview( player.Stock.HeadList, "head" );
 	}
 	
 	void changePartsBodyGui(){
-		GUI.Label( new Rect(312, 150, 300, 50), "Body Stock", guiSkin.GetStyle("Titulo") );
+		GUI.Label( new Rect(222, 150, 300, 50), "Body Stock", guiSkin.GetStyle("Titulo") );
+		
+		showPartsPreview( player.Stock.BodyList, "body" );
 	}
 	
 	void changePartsArmsGui(){
-		GUI.Label( new Rect(312, 150, 300, 50), "Arms Stoc", guiSkin.GetStyle("Titulo") );
+		GUI.Label( new Rect(222, 150, 300, 50), "Arms Stoc", guiSkin.GetStyle("Titulo") );
+		
+		showPartsPreview( player.Stock.ArmsList, "arms" );
 	}
 	
 	void changePartsLegsGui(){
-		GUI.Label( new Rect(312, 150, 300, 50), "Legs Stock", guiSkin.GetStyle("Titulo") );
+		GUI.Label( new Rect(222, 150, 300, 50), "Legs Stock", guiSkin.GetStyle("Titulo") );
+		
+		showPartsPreview( player.Stock.LegsList, "legs" );
+	}
+	
+	void showPartsPreview( List<GameObject> partList, string partName ){
+		int left = 222,
+			top = 250,
+			i;
+		
+		bool more = false;
+		
+		i = 0;
+		foreach( GameObject go in partList ){
+			Part part = go.GetComponent<Part>();			
+			
+			GUI.Label( new Rect(left, top, part.textura.width, part.textura.height), part.textura );
+			
+			left += 160;
+			
+			if( i == 2 ){
+				left = 222;
+				top += 160;
+			}else if ( i == 8 ){
+				more = true;
+				break;
+			}
+			
+			i++;
+		}
 	}
 
 	void Update () {

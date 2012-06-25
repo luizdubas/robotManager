@@ -21,7 +21,6 @@ public class Robo : MonoBehaviour {
 	
 	// Use this for initialization
 	void Start () {
-		Debug.Log( "Start new Robo" );
 	}
 	
 	// Update is called once per frame
@@ -34,8 +33,6 @@ public class Robo : MonoBehaviour {
 		
 		try{
 			RobotUtility robotUtility = GameObject.Find("RobotUtility").GetComponent<RobotUtility>();
-
-			Debug.Log( this.bodyPrefabName );
 			
 			this.roboGameObject = robotUtility.criarRobo( 
 				robotUtility.getGameObjectByName(this.bodyPrefabName), /** Armature  **/
@@ -51,7 +48,6 @@ public class Robo : MonoBehaviour {
 			retorno = false;
 		}
 		
-		Debug.Log("retorno = "+ retorno );
 		return retorno;	
 	}
 	

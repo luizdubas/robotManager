@@ -65,7 +65,9 @@
      <Compile Include="Assets\Scripts\GUI\GUIPointer.cs" />
      <Compile Include="Assets\Scripts\MainCamera.cs" />
      <Compile Include="Assets\Scripts\Part.cs" />
+     <Compile Include="Assets\Scripts\Player.cs" />
      <Compile Include="Assets\Scripts\Robo.cs" />
+     <Compile Include="Assets\Scripts\Stock.cs" />
      <Compile Include="Assets\Scripts\Util\RobotUtility.cs" />
      <Compile Include="Assets\Scripts\Workshop.cs" />
      <None Include="Assets\Standard Assets\Projectors\Guidelines.txt" />
