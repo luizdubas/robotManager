@@ -4,6 +4,8 @@ using System.Collections.Generic;
 
 public class RobotUtility : MonoBehaviour {
 	
+	public static int contador = 1;
+	
 	public GameObject prefabRobot1;
 	public GameObject prefabRobot2;
 	/** Colocar aki todos os prefabs dos robos **/
@@ -14,6 +16,17 @@ public class RobotUtility : MonoBehaviour {
 			retorno = prefabRobot1;
 		}else if( nome == "prefabRobot2" ){
 			retorno = prefabRobot2;
+		}
+		
+		return retorno;
+	}
+	
+	public string getNameByGameObject(GameObject go){
+		string retorno = null;
+		if( go == prefabRobot1 ){
+			retorno = "prefabRobot1";
+		}else if( go == prefabRobot2 ){
+			retorno = "prefabRobot2";
 		}
 		
 		return retorno;
@@ -30,6 +43,7 @@ public class RobotUtility : MonoBehaviour {
 		
 	public GameObject criarRobo( GameObject armaturePrefab, GameObject headPrefab, GameObject bodyPrefab, GameObject armsPrefab, GameObject legsPrefab, string scriptName ){
 		GameObject newRobot, oldPart, newPart;
+		Part part;
 		BoxCollider collider;
 		Rigidbody rigidbody;
 		Transform armature;
@@ -53,57 +67,52 @@ public class RobotUtility : MonoBehaviour {
 			oldPart = procuraObjetoEmUmaObjetoInstanciado( "head", newRobot.transform );
 			newPart = procuraObjetoEmUmaPrefab( "head", headPrefab );
 			
-			copyBones( oldPart, newPart );
-			
-			newPart.transform.position = oldPart.transform.position; 
-			
-			Destroy( oldPart );
-			
-			newPart.transform.parent = newRobot.transform;
+			changePart( oldPart, newPart, newRobot );
 		}
+		
+		part = procuraObjetoEmUmaObjetoInstanciado( "head", newRobot.transform ).GetComponent<Part>();
+		part.PartType = "head";
+		part.PrefabName = getNameByGameObject( headPrefab );
+		part.Id = RobotUtility.contador++;
 		
 		Debug.Log("\tContruindo Body: "+bodyPrefab.name);
 		if( bodyPrefab != armaturePrefab ){
 			oldPart = procuraObjetoEmUmaObjetoInstanciado( "body", newRobot.transform );
 			newPart = procuraObjetoEmUmaPrefab( "body", bodyPrefab );
 
-			copyBones( oldPart, newPart );
-			
-			newPart.transform.position = oldPart.transform.position; 
-			
-			Destroy( oldPart );
-			
-			newPart.transform.parent = newRobot.transform;
+			changePart( oldPart, newPart, newRobot );
 		}
+		
+		part = procuraObjetoEmUmaObjetoInstanciado( "body", newRobot.transform ).GetComponent<Part>();
+		part.PartType = "body";
+		part.PrefabName = getNameByGameObject( bodyPrefab );
+		part.Id = RobotUtility.contador++;
 		
 		Debug.Log("\tContruindo Arms: "+armsPrefab.name);		
 		if( armsPrefab != armaturePrefab ){
 			oldPart = procuraObjetoEmUmaObjetoInstanciado( "arms", newRobot.transform );
 			newPart = procuraObjetoEmUmaPrefab( "arms", armsPrefab );
 
-			copyBones( oldPart, newPart );
-			
-			newPart.transform.position = oldPart.transform.position; 
-			
-			Destroy( oldPart );
-			
-			newPart.transform.parent = newRobot.transform;
+			changePart( oldPart, newPart, newRobot );
 		}
+		
+		part = procuraObjetoEmUmaObjetoInstanciado( "arms", newRobot.transform ).GetComponent<Part>();
+		part.PartType = "arms";
+		part.PrefabName = getNameByGameObject( armsPrefab );
+		part.Id = RobotUtility.contador++;
 		
 		Debug.Log("\tContruindo legs: "+legsPrefab.name);
 		if( legsPrefab != armaturePrefab ){
 			oldPart = procuraObjetoEmUmaObjetoInstanciado( "legs", newRobot.transform );
 			newPart = procuraObjetoEmUmaPrefab( "legs", legsPrefab );
 
-			copyBones( oldPart, newPart );
-			
-			newPart.transform.position = oldPart.transform.position; 
-			
-			Destroy( oldPart );
-			
-			newPart.transform.parent = newRobot.transform;
+			changePart( oldPart, newPart, newRobot );
 		}
 		
+		part = procuraObjetoEmUmaObjetoInstanciado( "legs", newRobot.transform ).GetComponent<Part>();
+		part.PartType = "legs";
+		part.PrefabName = getNameByGameObject( legsPrefab );
+		part.Id = RobotUtility.contador++;
 		
 		Debug.Log("\tContruindo Fisica");
 		//collider.center = new Vector3( 0, 0 , -1 );
@@ -115,6 +124,37 @@ public class RobotUtility : MonoBehaviour {
 		Robo robo = new Robo();
 	
 		return newRobot;
+	}
+	
+	public GameObject changePart( GameObject oldGameObject, Part newPart, GameObject newRobot ){
+		Part clonedNewPart;
+				
+		GameObject newGameObject = procuraObjetoEmUmaPrefab( newPart.PartType, getGameObjectByName( newPart.PrefabName ) );
+		
+		newGameObject = changePart( oldGameObject, newGameObject, newRobot );
+		
+		newGameObject.name = newGameObject.name.Replace("(Clone)", "");
+		
+		clonedNewPart = newGameObject.GetComponent<Part>();
+		
+		clonedNewPart.PartType = newPart.PartType;
+		clonedNewPart.PrefabName = newPart.PrefabName;
+		clonedNewPart.Id = newPart.Id;
+		
+		return newGameObject;
+	}
+	
+	
+	public GameObject changePart( GameObject oldGameObject, GameObject newGameObject, GameObject newRobot ){
+		copyBones( oldGameObject, newGameObject );
+		
+		newGameObject.transform.position = oldGameObject.transform.position; 
+		
+		Destroy( oldGameObject );
+		
+		newGameObject.transform.parent = newRobot.transform;
+		
+		return newGameObject;
 	}
 	
 	private GameObject procuraObjetoEmUmaObjetoInstanciado( string nomeDoObjeto, Transform armature ){
@@ -157,5 +197,17 @@ public class RobotUtility : MonoBehaviour {
 		newMeshRenderer = destinyPart.transform.GetComponent<SkinnedMeshRenderer>();
 		
 		newMeshRenderer.bones = oldMeshRenderer.bones;
+	}
+	
+	public Part getPartNewInstance( string prefabName, string partName ){	
+		Part newPart = getGameObjectByName( prefabName ).transform.Find( partName ).GetComponent<Part>().clone();
+		
+		newPart.PartType = partName;
+		newPart.PrefabName = prefabName;
+		
+		//Aqui vai ter que pegar do banco quando for multiplayer
+		newPart.Id = RobotUtility.contador++;
+		
+		return newPart;
 	}
 }

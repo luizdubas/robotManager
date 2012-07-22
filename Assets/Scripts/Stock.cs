@@ -4,10 +4,10 @@ using System.Collections.Generic;
 
 public class Stock : MonoBehaviour {
 	
-	private List<GameObject> headList;
-	private List<GameObject> bodyList;
-	private List<GameObject> armsList;
-	private List<GameObject> legsList;
+	private List<Part> headList;
+	private List<Part> bodyList;
+	private List<Part> armsList;
+	private List<Part> legsList;
 	
 	// Use this for initialization
 	void Start () {
@@ -19,7 +19,7 @@ public class Stock : MonoBehaviour {
 	
 	}
 	
-	public List<GameObject> HeadList {
+	public List<Part> HeadList {
 		get {
 			return this.headList;
 		}
@@ -28,7 +28,7 @@ public class Stock : MonoBehaviour {
 		}
 	}
 
-	public List<GameObject> BodyList {
+	public List<Part> BodyList {
 		get {
 			return this.bodyList;
 		}
@@ -37,7 +37,7 @@ public class Stock : MonoBehaviour {
 		}
 	}
 
-	public List<GameObject> ArmsList {
+	public List<Part> ArmsList {
 		get {
 			return this.armsList;
 		}
@@ -46,7 +46,7 @@ public class Stock : MonoBehaviour {
 		}
 	}
 
-	public List<GameObject> LegsList {
+	public List<Part> LegsList {
 		get {
 			return this.legsList;
 		}

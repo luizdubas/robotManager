@@ -63,6 +63,7 @@
      <Compile Include="Assets\Scripts\Atributo.cs" />
      <Compile Include="Assets\Scripts\GUI\CreateRobot.cs" />
      <Compile Include="Assets\Scripts\GUI\GUIPointer.cs" />
+     <Compile Include="Assets\Scripts\GUI\GUIUtil.cs" />
      <Compile Include="Assets\Scripts\MainCamera.cs" />
      <Compile Include="Assets\Scripts\Part.cs" />
      <Compile Include="Assets\Scripts\Player.cs" />

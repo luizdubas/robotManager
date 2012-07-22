@@ -22,11 +22,11 @@ public class Workshop : MonoBehaviour {
 	public float larguraGUIOriginal = 0, alturaGUIOriginal = 0;
 	public int espacoAtributos = 0,tamanhoNome = 0;
 	public GUISkin guiSkin;
-	private int currentRobot = 0;
 	private Rect fullscreen;
 	private Player player;
 	private MenuWorkshopState menuState;
 	private MenuWorkshopChangePartsState changePartsState;
+	private GUIStyle selectedBorder;
 	
 	#endregion
 	
@@ -37,6 +37,10 @@ public class Workshop : MonoBehaviour {
 		
 		menuState = MenuWorkshopState.Default;
 		changePartsState = MenuWorkshopChangePartsState.Head;
+
+		selectedBorder = new GUIStyle();
+		selectedBorder.border = new RectOffset( 135, 135, 135, 135 );
+		selectedBorder.normal.background = GUIUtil.getBlackTexture();
 				
 		player.Robo = new Robo();
 		player.Stock = new Stock();
@@ -52,30 +56,30 @@ public class Workshop : MonoBehaviour {
 		player.Robo.RoboGameObject.transform.localScale = new Vector3( 200, 200, 200 );
 		player.Robo.RoboGameObject.transform.position = new Vector3(0 , 9.3f, 10);
 			
-		player.Stock.HeadList = new List<GameObject>();
-		player.Stock.BodyList = new List<GameObject>();
-		player.Stock.ArmsList = new List<GameObject>();
-		player.Stock.LegsList = new List<GameObject>();
+		player.Stock.HeadList = new List<Part>();
+		player.Stock.BodyList = new List<Part>();
+		player.Stock.ArmsList = new List<Part>();
+		player.Stock.LegsList = new List<Part>();
 		
-		player.Stock.HeadList.Add( robotUtility.prefabRobot1.transform.Find("head").gameObject );
-		player.Stock.BodyList.Add( robotUtility.prefabRobot1.transform.Find("body").gameObject );
-		player.Stock.ArmsList.Add( robotUtility.prefabRobot1.transform.Find("arms").gameObject );
-		player.Stock.LegsList.Add( robotUtility.prefabRobot1.transform.Find("legs").gameObject );
+		player.Stock.HeadList.Add( player.Robo.HeadPart );
+		player.Stock.BodyList.Add( player.Robo.BodyPart );
+		player.Stock.ArmsList.Add( player.Robo.ArmsPart );
+		player.Stock.LegsList.Add( player.Robo.LegsPart );
 		
-		player.Stock.HeadList.Add( robotUtility.prefabRobot2.transform.Find("head").gameObject );
-		player.Stock.BodyList.Add( robotUtility.prefabRobot2.transform.Find("body").gameObject );
-		player.Stock.ArmsList.Add( robotUtility.prefabRobot2.transform.Find("arms").gameObject );
-		player.Stock.LegsList.Add( robotUtility.prefabRobot2.transform.Find("legs").gameObject );
+		player.Stock.HeadList.Add( robotUtility.getPartNewInstance("prefabRobot2", "head") );
+		player.Stock.BodyList.Add( robotUtility.getPartNewInstance("prefabRobot2", "body") );
+		player.Stock.ArmsList.Add( robotUtility.getPartNewInstance("prefabRobot2", "arms") );
+		player.Stock.LegsList.Add( robotUtility.getPartNewInstance("prefabRobot2", "legs") );
 		
-		player.Stock.HeadList.Add( robotUtility.prefabRobot1.transform.Find("head").gameObject );
-		player.Stock.BodyList.Add( robotUtility.prefabRobot1.transform.Find("body").gameObject );
-		player.Stock.ArmsList.Add( robotUtility.prefabRobot1.transform.Find("arms").gameObject );
-		player.Stock.LegsList.Add( robotUtility.prefabRobot1.transform.Find("legs").gameObject );
+		player.Stock.HeadList.Add( robotUtility.getPartNewInstance("prefabRobot1", "head") );
+		player.Stock.BodyList.Add( robotUtility.getPartNewInstance("prefabRobot1", "body") );
+		player.Stock.ArmsList.Add( robotUtility.getPartNewInstance("prefabRobot1", "arms") );
+		player.Stock.LegsList.Add( robotUtility.getPartNewInstance("prefabRobot1", "legs") );
 		
-		player.Stock.HeadList.Add( robotUtility.prefabRobot2.transform.Find("head").gameObject );
-		player.Stock.BodyList.Add( robotUtility.prefabRobot2.transform.Find("body").gameObject );
-		player.Stock.ArmsList.Add( robotUtility.prefabRobot2.transform.Find("arms").gameObject );
-		player.Stock.LegsList.Add( robotUtility.prefabRobot2.transform.Find("legs").gameObject );
+		player.Stock.HeadList.Add( robotUtility.getPartNewInstance("prefabRobot2", "head") );
+		player.Stock.BodyList.Add( robotUtility.getPartNewInstance("prefabRobot2", "body") );
+		player.Stock.ArmsList.Add( robotUtility.getPartNewInstance("prefabRobot2", "arms") );
+		player.Stock.LegsList.Add( robotUtility.getPartNewInstance("prefabRobot2", "legs") );
 	}
 	
 	void OnGUI(){
@@ -147,28 +151,28 @@ public class Workshop : MonoBehaviour {
 	void changePartsHeadGui(){		
 		GUI.Label( new Rect(222, 150, 300, 50), "Head Stock", guiSkin.GetStyle("Titulo") );
 		
-		showPartsPreview( player.Stock.HeadList, "head" );
+		showPartsPreview( player.Stock.HeadList, "head", player.Robo.HeadPart.Id );
 	}
 	
 	void changePartsBodyGui(){
 		GUI.Label( new Rect(222, 150, 300, 50), "Body Stock", guiSkin.GetStyle("Titulo") );
 		
-		showPartsPreview( player.Stock.BodyList, "body" );
+		showPartsPreview( player.Stock.BodyList, "body", player.Robo.BodyPart.Id );
 	}
 	
 	void changePartsArmsGui(){
 		GUI.Label( new Rect(222, 150, 300, 50), "Arms Stoc", guiSkin.GetStyle("Titulo") );
 		
-		showPartsPreview( player.Stock.ArmsList, "arms" );
+		showPartsPreview( player.Stock.ArmsList, "arms", player.Robo.ArmsPart.Id );
 	}
 	
 	void changePartsLegsGui(){
 		GUI.Label( new Rect(222, 150, 300, 50), "Legs Stock", guiSkin.GetStyle("Titulo") );
 		
-		showPartsPreview( player.Stock.LegsList, "legs" );
+		showPartsPreview( player.Stock.LegsList, "legs", player.Robo.LegsPart.Id );
 	}
 	
-	void showPartsPreview( List<GameObject> partList, string partName ){
+	void showPartsPreview( List<Part> partList, string partName, double selectedId ){
 		int left = 222,
 			top = 250,
 			i;
@@ -176,10 +180,16 @@ public class Workshop : MonoBehaviour {
 		bool more = false;
 		
 		i = 0;
-		foreach( GameObject go in partList ){
-			Part part = go.GetComponent<Part>();			
-			
-			GUI.Label( new Rect(left, top, part.textura.width, part.textura.height), part.textura );
+//		Debug.Log("selected = "+ selectedId );		
+		foreach( Part part in partList ){
+
+			if( part.Id == selectedId ){
+				GUI.Label( new Rect(left, top, part.textura.width, part.textura.height), part.textura, selectedBorder );
+			}else{
+				if( GUI.Button( new Rect(left, top, part.textura.width, part.textura.height), part.textura ) ){
+					player.Robo.changePart( partName, part );
+				}
+			}
 			
 			left += 160;
 			
@@ -193,6 +203,11 @@ public class Workshop : MonoBehaviour {
 			
 			i++;
 		}
+		
+		if( more ){
+			
+		}
+		
 	}
 
 	void Update () {
