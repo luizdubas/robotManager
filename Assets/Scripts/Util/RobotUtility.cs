@@ -137,9 +137,7 @@ public class RobotUtility : MonoBehaviour {
 		
 		clonedNewPart = newGameObject.GetComponent<Part>();
 		
-		clonedNewPart.PartType = newPart.PartType;
-		clonedNewPart.PrefabName = newPart.PrefabName;
-		clonedNewPart.Id = newPart.Id;
+		newPart.copyUniqueAttributes( clonedNewPart );
 		
 		return newGameObject;
 	}

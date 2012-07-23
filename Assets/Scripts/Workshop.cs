@@ -39,7 +39,8 @@ public class Workshop : MonoBehaviour {
 		changePartsState = MenuWorkshopChangePartsState.Head;
 
 		selectedBorder = new GUIStyle();
-		selectedBorder.border = new RectOffset( 135, 135, 135, 135 );
+		selectedBorder.border = new RectOffset( 135, 135, 135, 145 );
+		
 		selectedBorder.normal.background = GUIUtil.getBlackTexture();
 				
 		player.Robo = new Robo();
@@ -100,96 +101,183 @@ public class Workshop : MonoBehaviour {
 		GUI.Label(posicaoTituloTela,"Workshop",guiSkin.GetStyle("Titulo"));
 		GUI.Box(posicaoTituloTela,"",guiSkin.GetStyle("TituloOverlay"));
 		
-		if( GUI.Button( new Rect(0, 133, 325, 50),"Trocar Partes",guiSkin.GetStyle("Titulo") ) ){
+		if( GUI.Button( new Rect(0, 133, 325, 50),"Change Parts",guiSkin.GetStyle("Titulo") ) ){
 			menuState = MenuWorkshopState.ChangeParts;
 		}		
 	}
 	
+	
 	void changePartsGui(){
-		GUI.Label(posicaoTituloTela,"Trocar Partes",guiSkin.GetStyle("Titulo"));
+		GUI.Label(posicaoTituloTela,"Change Parts",guiSkin.GetStyle("Titulo"));
 		GUI.Box(posicaoTituloTela,"",guiSkin.GetStyle("TituloOverlay"));
 
-		if( GUI.Button( new Rect(0,200,200,50),"Cabeça",guiSkin.GetStyle("Titulo") ) ){
+		if( GUI.Button( new Rect(0,200,200,50),"Head",guiSkin.GetStyle("Titulo") ) ){
 			changePartsState = MenuWorkshopChangePartsState.Head;
 		}
 		
-		if( GUI.Button( new Rect(0,300,200,50),"Corpo",guiSkin.GetStyle("Titulo") ) ){
+		if( GUI.Button( new Rect(0,300,200,50),"Body",guiSkin.GetStyle("Titulo") ) ){
 			changePartsState = MenuWorkshopChangePartsState.Body;
 		}
 		
-		if( GUI.Button( new Rect(0,400,200,50),"Braços",guiSkin.GetStyle("Titulo") ) ){
+		if( GUI.Button( new Rect(0,400,200,50),"Arms",guiSkin.GetStyle("Titulo") ) ){
 			changePartsState = MenuWorkshopChangePartsState.Arms;
 		}
 		
-		if( GUI.Button( new Rect(0,500,200,50),"Pernas",guiSkin.GetStyle("Titulo") ) ){
+		if( GUI.Button( new Rect(0,500,200,50),"Legs",guiSkin.GetStyle("Titulo") ) ){
 			changePartsState = MenuWorkshopChangePartsState.Legs;
 		}
 		
-		if( GUI.Button( new Rect(0,alturaGUIOriginal -100,200,50),"Voltar",guiSkin.GetStyle("Titulo") ) ){
+		if( GUI.Button( new Rect(0,alturaGUIOriginal -100,200,50),"Back",guiSkin.GetStyle("Titulo") ) ){
 			menuState = MenuWorkshopState.Default;
 		}
 		
-		
-		GUI.Label( new Rect(712, 150, 200, 50), "Stats", guiSkin.GetStyle("Titulo") );
+		changePartsStatsLabelGui();
 		
 		switch(changePartsState){
 		case MenuWorkshopChangePartsState.Head:
 			changePartsHeadGui();
+			
+			changePartsStatsCurrentPartGui( player.Robo.HeadPart );
 			break;
 		case MenuWorkshopChangePartsState.Body:	
 			changePartsBodyGui();
+			
+			changePartsStatsCurrentPartGui( player.Robo.BodyPart );
 			break;
 		case MenuWorkshopChangePartsState.Arms:	
 			changePartsArmsGui();
+			
+			changePartsStatsCurrentPartGui( player.Robo.ArmsPart );
 			break;
 		case MenuWorkshopChangePartsState.Legs:	
 			changePartsLegsGui();
+			
+			changePartsStatsCurrentPartGui( player.Robo.LegsPart );
 			break;
 		}
+	}
+	
+	void changePartsStatsLabelGui(){
+		int left = 700;
+		
+		GUIStyle skin = new GUIStyle();
+		skin.normal.background = GUIUtil.getBlackTexture();
+		
+		GUI.Box( new Rect(left - 20, 230, 330, 320), "", skin );
+	
+		GUI.Label( new Rect(left, 150, 200, 50), "Stats", guiSkin.GetStyle("Titulo") );
+		
+		GUI.Label( new Rect(left, 250, 200, 50), "Name", guiSkin.GetStyle("WorkshopStatsLabel"));
+		
+		GUI.Label( new Rect(left, 300, 200, 50), "Attack", guiSkin.GetStyle("WorkshopStatsLabel") );
+		
+		GUI.Label( new Rect(left, 350, 200, 50), "Defense", guiSkin.GetStyle("WorkshopStatsLabel") );
+		
+		GUI.Label( new Rect(left, 400, 200, 50), "Hp", guiSkin.GetStyle("WorkshopStatsLabel") );
+		
+		GUI.Label( new Rect(left, 450, 200, 50), "Agility", guiSkin.GetStyle("WorkshopStatsLabel") );
+		
+		GUI.Label( new Rect(left, 500, 200, 50), "Stamina", guiSkin.GetStyle("WorkshopStatsLabel") );
+	}
+	
+	void changePartsStatsCurrentPartGui( Part currentPart ){
+		int left = 790;
+		
+		GUI.Label( new Rect(left, 250, 200, 50), currentPart.Label, guiSkin.GetStyle("WorkshopStatsValue") );
+		
+		GUI.Label( new Rect(left, 300, 200, 50), currentPart.Attack.ToString(), guiSkin.GetStyle("WorkshopStatsValue") );
+		
+		GUI.Label( new Rect(left, 350, 200, 50), currentPart.Defense.ToString(), guiSkin.GetStyle("WorkshopStatsValue") );
+		
+		GUI.Label( new Rect(left, 400, 200, 50), currentPart.Hp.ToString(), guiSkin.GetStyle("WorkshopStatsValue") );
+		
+		GUI.Label( new Rect(left, 450, 200, 50), currentPart.Agility.ToString(), guiSkin.GetStyle("WorkshopStatsValue") );
+		
+		GUI.Label( new Rect(left, 500, 200, 50), currentPart.Stamina.ToString(), guiSkin.GetStyle("WorkshopStatsValue")	 );
+	}
+	
+	void changePartsStatsHoverPartGui( Part hoverPart ){
+		int left = 880;
+				
+		GUI.Label( new Rect(left, 250, 200, 50), hoverPart.Label, guiSkin.GetStyle("WorkshopStatsValue") );
+		
+		GUI.Label( new Rect(left, 300, 200, 50), hoverPart.Attack.ToString(), guiSkin.GetStyle("WorkshopStatsValue") );
+		
+		GUI.Label( new Rect(left, 350, 200, 50), hoverPart.Defense.ToString(), guiSkin.GetStyle("WorkshopStatsValue") );
+		
+		GUI.Label( new Rect(left, 400, 200, 50), hoverPart.Hp.ToString(), guiSkin.GetStyle("WorkshopStatsValue") );
+		
+		GUI.Label( new Rect(left, 450, 200, 50), hoverPart.Agility.ToString(), guiSkin.GetStyle("WorkshopStatsValue") );
+		
+		GUI.Label( new Rect(left, 500, 200, 50), hoverPart.Stamina.ToString(), guiSkin.GetStyle("WorkshopStatsValue") );
+	}
+	
+	void changePartsStatsComparisionPartGui( Part currentPart, Part hoverPart ){
+		int left = 970;
+		
+		GUI.Label( new Rect(left, 300, 200, 50), (currentPart.Attack - hoverPart.Attack).ToString(), guiSkin.GetStyle("WorkshopStatsValue") );
+		
+		GUI.Label( new Rect(left, 350, 200, 50), (currentPart.Defense - hoverPart.Defense).ToString(), guiSkin.GetStyle("WorkshopStatsValue") );
+		
+		GUI.Label( new Rect(left, 400, 200, 50), (currentPart.Hp - hoverPart.Hp).ToString(), guiSkin.GetStyle("WorkshopStatsValue") );
+		
+		GUI.Label( new Rect(left, 450, 200, 50), (currentPart.Agility - hoverPart.Agility).ToString(), guiSkin.GetStyle("WorkshopStatsValue") );
+		
+		GUI.Label( new Rect(left, 500, 200, 50), (currentPart.Stamina - hoverPart.Stamina).ToString(), guiSkin.GetStyle("WorkshopStatsValue") );
 	}
 	
 	void changePartsHeadGui(){		
 		GUI.Label( new Rect(222, 150, 300, 50), "Head Stock", guiSkin.GetStyle("Titulo") );
 		
-		showPartsPreview( player.Stock.HeadList, "head", player.Robo.HeadPart.Id );
+		showPartsPreview( player.Stock.HeadList, "head", player.Robo.HeadPart );
 	}
 	
 	void changePartsBodyGui(){
 		GUI.Label( new Rect(222, 150, 300, 50), "Body Stock", guiSkin.GetStyle("Titulo") );
 		
-		showPartsPreview( player.Stock.BodyList, "body", player.Robo.BodyPart.Id );
+		showPartsPreview( player.Stock.BodyList, "body", player.Robo.BodyPart );
 	}
 	
 	void changePartsArmsGui(){
 		GUI.Label( new Rect(222, 150, 300, 50), "Arms Stoc", guiSkin.GetStyle("Titulo") );
 		
-		showPartsPreview( player.Stock.ArmsList, "arms", player.Robo.ArmsPart.Id );
+		showPartsPreview( player.Stock.ArmsList, "arms", player.Robo.ArmsPart );
 	}
 	
 	void changePartsLegsGui(){
 		GUI.Label( new Rect(222, 150, 300, 50), "Legs Stock", guiSkin.GetStyle("Titulo") );
 		
-		showPartsPreview( player.Stock.LegsList, "legs", player.Robo.LegsPart.Id );
+		showPartsPreview( player.Stock.LegsList, "legs", player.Robo.LegsPart );
 	}
 	
-	void showPartsPreview( List<Part> partList, string partName, double selectedId ){
+	void showPartsPreview( List<Part> partList, string partName, Part currentPart ){
 		int left = 222,
 			top = 250,
-			i;
+			i = 0;
+		
+		Rect partBounds;
+		Vector2 mousePosition = new Vector2( Input.mousePosition.x, (Screen.height - Input.mousePosition.y) );
 		
 		bool more = false;
 		
-		i = 0;
-//		Debug.Log("selected = "+ selectedId );		
 		foreach( Part part in partList ){
-
-			if( part.Id == selectedId ){
-				GUI.Label( new Rect(left, top, part.textura.width, part.textura.height), part.textura, selectedBorder );
+			partBounds = new Rect( left, top, part.texture.width / 2, part.texture.height / 2 + 10 );
+			
+			if( part.Id == currentPart.Id ){
+				GUI.Label( partBounds, part.texture, selectedBorder );
 			}else{
-				if( GUI.Button( new Rect(left, top, part.textura.width, part.textura.height), part.textura ) ){
+				if( GUI.Button( partBounds, part.texture ) ){
 					player.Robo.changePart( partName, part );
 				}
 			}
+			
+			//Cuidado isso nao funciona dentro do editor do Unity.
+			if( partBounds.Contains( mousePosition ) ){
+				changePartsStatsHoverPartGui( part );
+				changePartsStatsComparisionPartGui( currentPart, part );
+			}
+			
+			GUI.Label( new Rect(left + 30, top + 110, part.texture.width / 2, part.texture.height / 2), part.label );
 			
 			left += 160;
 			
