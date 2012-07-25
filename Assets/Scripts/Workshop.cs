@@ -212,18 +212,40 @@ public class Workshop : MonoBehaviour {
 		GUI.Label( new Rect(left, 500, 200, 50), hoverPart.Stamina.ToString(), guiSkin.GetStyle("WorkshopStatsValue") );
 	}
 	
+	string getStyleForStatsComparision( double delta ){
+		string style = "";
+		
+		if( delta > 0 ){
+			style = "WorkshopStatsGreenValue";
+		}else if( delta < 0 ){
+			style = "WorkshopStatsRedValue";
+		}else{
+			style = "WorkshopStatsValue";
+		}
+		
+		return style;
+	}
+	
 	void changePartsStatsComparisionPartGui( Part currentPart, Part hoverPart ){
 		int left = 970;
 		
-		GUI.Label( new Rect(left, 300, 200, 50), (currentPart.Attack - hoverPart.Attack).ToString(), guiSkin.GetStyle("WorkshopStatsValue") );
+		double deltaAttack, deltaDefense, deltaHp, deltaAgility, deltaStamina;
 		
-		GUI.Label( new Rect(left, 350, 200, 50), (currentPart.Defense - hoverPart.Defense).ToString(), guiSkin.GetStyle("WorkshopStatsValue") );
+		deltaAttack = hoverPart.Attack - currentPart.Attack;
+		deltaDefense = hoverPart.Defense - currentPart.Defense;
+		deltaHp = hoverPart.Hp - currentPart.Hp;
+		deltaAgility = hoverPart.Agility - currentPart.Agility;
+		deltaStamina = hoverPart.Stamina - currentPart.Stamina;
 		
-		GUI.Label( new Rect(left, 400, 200, 50), (currentPart.Hp - hoverPart.Hp).ToString(), guiSkin.GetStyle("WorkshopStatsValue") );
+		GUI.Label( new Rect(left, 300, 200, 50), deltaAttack.ToString(), guiSkin.GetStyle( getStyleForStatsComparision( deltaAttack ) ) );
 		
-		GUI.Label( new Rect(left, 450, 200, 50), (currentPart.Agility - hoverPart.Agility).ToString(), guiSkin.GetStyle("WorkshopStatsValue") );
+		GUI.Label( new Rect(left, 350, 200, 50), deltaDefense.ToString(), guiSkin.GetStyle(getStyleForStatsComparision( deltaDefense )) );
 		
-		GUI.Label( new Rect(left, 500, 200, 50), (currentPart.Stamina - hoverPart.Stamina).ToString(), guiSkin.GetStyle("WorkshopStatsValue") );
+		GUI.Label( new Rect(left, 400, 200, 50), deltaHp.ToString(), guiSkin.GetStyle(getStyleForStatsComparision( deltaHp )) );
+		
+		GUI.Label( new Rect(left, 450, 200, 50), deltaAgility.ToString(), guiSkin.GetStyle(getStyleForStatsComparision( deltaAgility )) );
+		
+		GUI.Label( new Rect(left, 500, 200, 50), deltaStamina.ToString(), guiSkin.GetStyle(getStyleForStatsComparision( deltaStamina )) );
 	}
 	
 	void changePartsHeadGui(){		
